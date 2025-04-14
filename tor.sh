@@ -1,7 +1,7 @@
 #!/bin/bash
 
-COUNTRIES=("us" "fr" "de" "es")
-# COUNTRIES=("us" "ca" "gb" "de" "fr" "it" "es" "au" "in" "jp" "cn" "br" "ru" "mx" "kr" "sa" "za" "nl" "se" "no" "fi" "dk" "at" "ch" "be" "pl" "gr" "pt" "tr" "ng" "kr" "id" "my" "sg" "ph" "th" "pk" "ua" "cz" "sk" "ro" "hu" "il" "ie" "hr" "cl" "co" "pe" "eg")
+COUNTRIES=("us" "fr")
+#COUNTRIES=("us" "fr" "de" "es" "it")
 BASE_SOCKS_PORT=9050
 BASE_CONTROL_PORT=10000
 MAPPING_FILE="./proxies.json"
@@ -26,24 +26,31 @@ for i in "${!COUNTRIES[@]}"; do
     --RunAsDaemon 1 \
     --SocksPort "0.0.0.0:$SOCKS_PORT" \
     --ControlPort "$CONTROL_PORT" \
+    --CookieAuthentication 0 \
+    --HashedControlPassword "16:6359B2674A47D83060B5020A5EC000FA0182D5CE9B52E73F7DD1187B8F" \
     --DataDirectory "$DATA_DIR" \
     --ExitNodes "{$COUNTRY}" \
     --StrictNodes 1 \
+    --MaxCircuitDirtiness 600 \
     --Log "notice file $LOG_FILE"
 
   # Write JSON mapping entry
-  echo "\"$COUNTRY\": $SOCKS_PORT," >> "$MAPPING_FILE"
+  echo "\"$COUNTRY\": {\"socks_port\": $SOCKS_PORT, \"control_port\": $CONTROL_PORT}," >> "$MAPPING_FILE"
 
   sleep 3
 done
 
-# Remove trailing comma from the last line
-sed -i '$ s/,$//' "$MAPPING_FILE"
-
 echo "}" >> "$MAPPING_FILE"
+
+# Remove trailing comma from the last line
+if sed --version >/dev/null 2>&1; then
+  sed -i '$!N;/,\n}/s/,\n}/\n}/' "$MAPPING_FILE"
+else
+  sed -i '' '$!N;/,\n}/s/,\n}/\n}/' "$MAPPING_FILE"
+fi
 
 echo "Tor proxies launched and mapping written to $MAPPING_FILE"
 
-python3 -m http.server 8080 --bind 0.0.0.0
-
 echo "Tor proxies are running. You can access the mapping at http://localhost:8080/proxies.json"
+
+npm start

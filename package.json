@@ -1,0 +1,15 @@
+{
+  "name": "tor_proxy",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:dm0lz/tor_proxy.git",
+  "author": "Olivier <ducrouxolivier@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "dotenv": "^16.5.0",
+    "express": "^5.1.0"
+  }
+}

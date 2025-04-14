@@ -1,10 +1,14 @@
 FROM alpine:latest AS base
 
-RUN apk add --no-cache tor bash python3 py3-pip
+RUN apk add --no-cache tor bash nodejs npm curl
 
 FROM base AS build
+WORKDIR /app
 COPY tor.sh /app/tor.sh
+COPY package*.json /app/
+COPY index.js /app/
 RUN chmod +x /app/tor.sh
+RUN npm ci --only=production
 
 FROM base AS final
 
@@ -23,7 +27,7 @@ RUN mkdir /app && chown appuser:appuser /app
 WORKDIR /app
 USER appuser
 
-COPY --from=build /app/tor.sh /app/
+COPY --from=build /app/ /app/
 
 EXPOSE 9050-9150
 EXPOSE 8080

@@ -1,2 +1,4 @@
 tor_data_*/
 proxies.json
+.env
+node_modules/

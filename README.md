@@ -12,8 +12,20 @@ A lightweight Tor proxy service.
 ### Using Docker
 
 ```bash
-docker build -t tor-proxy .
-docker run -p 8080:8080 -p 9050-9100:9050-9100 tor-proxy
+docker build -t tor_proxy .
+docker run -p 8080:8080 -p 9050-9100:9050-9100 tor_proxy
+```
+
+Generate HashedControlPassword :
+
+```bash
+tor --hash-password passwd
+```
+
+To build and push :
+
+```bash
+docker build --platform=linux/amd64,linux/arm64 -t registry-username/tor_proxy:latest --push .
 ```
 
 ### Testing the Connection
@@ -24,6 +36,8 @@ curl --socks5 localhost:9050 https://check.torproject.org/api/ip
 
 Access the proxy mappings at: http://localhost:8080/proxies.json
 
-## License
+Request a new identity :
 
-MIT License
+```bash
+curl -X POST http://localhost:8080/newnym/fr
+```
