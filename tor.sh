@@ -25,7 +25,7 @@ for i in "${!COUNTRIES[@]}"; do
   tor \
     --RunAsDaemon 1 \
     --SocksPort "0.0.0.0:$SOCKS_PORT" \
-    --ControlPort "$CONTROL_PORT" \
+    --ControlPort "0.0.0.0:$CONTROL_PORT" \
     --CookieAuthentication 0 \
     --HashedControlPassword "16:6359B2674A47D83060B5020A5EC000FA0182D5CE9B52E73F7DD1187B8F" \
     --DataDirectory "$DATA_DIR" \
