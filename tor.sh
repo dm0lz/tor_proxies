@@ -1,9 +1,9 @@
 #!/bin/bash
 
-COUNTRIES=("us" "fr")
-#COUNTRIES=("us" "fr" "de" "es" "it")
-BASE_SOCKS_PORT=9050
-BASE_CONTROL_PORT=10000
+# COUNTRIES=("fr" "us")
+COUNTRIES=("us" "fr" "de" "es" "it")
+BASE_SOCKS_PORT=9150
+BASE_CONTROL_PORT=15000
 MAPPING_FILE="./proxies.json"
 
 # Convert to absolute path
@@ -37,14 +37,14 @@ for i in "${!COUNTRIES[@]}"; do
   # Write JSON mapping entry
   echo "\"$COUNTRY\": {\"socks_port\": $SOCKS_PORT, \"control_port\": $CONTROL_PORT}," >> "$MAPPING_FILE"
 
-  sleep 3
+  sleep 1
 done
 
 echo "}" >> "$MAPPING_FILE"
 
 # Remove trailing comma from the last line
 if sed --version >/dev/null 2>&1; then
-  sed -i '$!N;/,\n}/s/,\n}/\n}/' "$MAPPING_FILE"
+  sed -i "$(($(wc -l < proxies.json)-1))s/,\s*$/ /" "$MAPPING_FILE"
 else
   sed -i '' '$!N;/,\n}/s/,\n}/\n}/' "$MAPPING_FILE"
 fi

@@ -13,7 +13,7 @@ A lightweight Tor proxy service.
 
 ```bash
 docker build -t tor_proxy .
-docker run -p 8080:8080 -p 9050-9100:9050-9100 tor_proxy
+docker run -p 8080:8080 -p 9150-9250:9150-9250 tor_proxy
 ```
 
 Generate HashedControlPassword :
@@ -31,7 +31,7 @@ docker build --platform=linux/amd64,linux/arm64 -t registry-username/tor_proxy:l
 ### Testing the Connection
 
 ```bash
-curl --socks5 localhost:9050 https://check.torproject.org/api/ip
+curl --socks5 localhost:9150 https://check.torproject.org/api/ip
 ```
 
 Access the proxy mappings at: http://localhost:8080/proxies.json
