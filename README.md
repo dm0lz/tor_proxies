@@ -12,8 +12,8 @@ A lightweight Tor proxy service.
 ### Using Docker
 
 ```bash
-docker build -t tor_proxy .
-docker run -p 8080:8080 -p 9150-9250:9150-9250 tor_proxy
+docker build -t tor_proxies .
+docker run -p 8080:8080 -p 9150-9250:9150-9250 tor_proxies
 ```
 
 Generate HashedControlPassword :
@@ -25,7 +25,7 @@ tor --hash-password passwd
 To build and push :
 
 ```bash
-docker build --platform=linux/amd64,linux/arm64 -t registry-username/tor_proxy:latest --push .
+docker build --platform=linux/amd64,linux/arm64 -t registry-username/tor_proxies:latest --push .
 ```
 
 ### Testing the Connection
