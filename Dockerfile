@@ -30,6 +30,6 @@ USER appuser
 COPY --from=build /app/ /app/
 
 EXPOSE 9150-9250
-EXPOSE 8080
+EXPOSE 8090
 
 ENTRYPOINT [ "/app/tor.sh" ]

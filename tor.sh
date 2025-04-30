@@ -51,6 +51,6 @@ fi
 
 echo "Tor proxies launched and mapping written to $MAPPING_FILE"
 
-echo "Tor proxies are running. You can access the mapping at http://localhost:8080/proxies.json"
+echo "Tor proxies are running. You can access the mapping at http://localhost:8090/proxies.json"
 
 npm start

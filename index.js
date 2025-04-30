@@ -4,7 +4,7 @@ const path = require("path");
 const net = require("net");
 
 const app = express();
-const port = 8080;
+const port = 8090;
 const mappingPath = path.join(__dirname, "proxies.json");
 require("dotenv").config();
 
