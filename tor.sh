@@ -1,7 +1,7 @@
 #!/bin/bash
 
-# COUNTRIES=("fr" "us")
-COUNTRIES=("us" "fr" "de" "es" "it")
+COUNTRIES=("es" "us")
+# COUNTRIES=("us" "fr" "de" "es" "it")
 BASE_SOCKS_PORT=9150
 BASE_CONTROL_PORT=15000
 MAPPING_FILE="./proxies.json"

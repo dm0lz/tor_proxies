@@ -24,6 +24,7 @@ A service that runs multiple Tor instances, each configured with a specific coun
 ```bash
 docker build -t tor_proxies .
 docker run -p 8090:8090 -p 9150-9250:9150-9250 tor_proxies
+docker run -p 0.0.0.0:9150-9250:9150-9250 -p 0.0.0.0:8090:8090 olivier86/tor_proxies
 ```
 
 Generate HashedControlPassword :
